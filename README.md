@@ -125,13 +125,5 @@ MinIO
 Redis/PostgreSQL if needed
 
 9. Security Recommendations
-Use HTTPS (with Nginx reverse proxy or Caddy)
-
-Validate all GraphQL and REST inputs
-
-Enable CORS only where needed
-
-Use rate limiting and logging middleware
-
-Set up CI/CD pipeline to scan for vulnerabilities (e.g., npm audit, gosec)
+JWT tokens used in authentication
 
