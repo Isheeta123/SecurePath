@@ -80,26 +80,19 @@ Run MinIO
 
 minio server /mnt/data --console-address ":9001"
 Access URLs
-
-API: http://localhost:9000
-
-Console: http://localhost:9001
-
 Default Credentials
 
-Access Key: minioadmin
-
-Secret Key: minioadmin
+Access Key: minio123
+Secret Key: minio123
 
 **✅ Change immediately:**
 
 export MINIO_ROOT_USER=your_secure_user
 export MINIO_ROOT_PASSWORD=your_secure_password
+
 **🔐 7. JWT Authentication**
 Use Libraries
-
 Go: github.com/golang-jwt/jwt/v5
-
 Node.js: jsonwebtoken
 
 **Token Validation (Go Example):**
@@ -107,7 +100,7 @@ Node.js: jsonwebtoken
 token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
     return []byte(os.Getenv("JWT_SECRET")), nil
 })
-✅ Validate algorithm (e.g., HS256 or RS256)
+✅ Validate algorithm
 ✅ Store secrets in .env or secret manager (Vault, AWS Secrets Manager, etc.)
 
 **🐳 8. Run All Services (Docker Compose - Optional)**
