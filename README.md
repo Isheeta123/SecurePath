@@ -1,6 +1,6 @@
 # Download Link From Github #
 
-# 🚀 Tech Stack Overview
+##🚀 Tech Stack Overview
 Frontend: React.js
 
 API Gateway: GraphQL (Apollo Gateway)
