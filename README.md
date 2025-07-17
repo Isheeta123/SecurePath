@@ -41,8 +41,7 @@ Add .env with appropriate environment variables (secure API keys, service URLs).
 Example .env:
 
 JWT_SECRET=your_secure_secret
-SERVICE_USER=http://localhost:5001
-SERVICE_PRODUCT=http://localhost:5002
+
 
 4. Install gRPC
 
