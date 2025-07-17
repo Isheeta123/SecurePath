@@ -1,129 +1,174 @@
-                                                           # Download from the github link #
+🚀 Tech Stack Overview
+Frontend: React.js
 
-## TechStack Used:
-1) React.js
-2) Graphql gateway
-3) GRPC
-4) Golang
-5) MINIOS3 BUCKET
-6) JWT Auth
+API Gateway: GraphQL (Apollo Gateway)
 
-1. Clone the GitHub Repository
+Communication: gRPC
 
-git clone https://github.com/<your-org>/<your-repo>.git
+Backend: Golang Microservices
+
+Storage: MinIO (S3-compatible bucket)
+
+Authentication: JWT (JSON Web Tokens)
+
+🛠️ 1. Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/<your-repo>.git
 cd <your-repo>
-Replace the URL with your actual repository.
+⚙️ 2. Install Node.js and React
+Install Node.js LTS
 
-⚙2. Install Node.js and React.js
-
-# Install Node.js (LTS recommended)
+bash
+Copy
+Edit
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
+Check Versions
 
-# Check versions
+bash
+Copy
+Edit
 node -v
 npm -v
+Install React Frontend Dependencies
 
-# Install project dependencies (React frontend)
+bash
+Copy
+Edit
 cd frontend
 npm install
-Use nvm (Node Version Manager) if you want more control over Node versions.
+(Optional): Use NVM to manage Node versions
 
-🕸3. Install GraphQL Gateway
-This is often a custom server or Apollo Gateway.
-
-If using Apollo Gateway:
-
+🌐 3. Setup GraphQL Gateway (Apollo Gateway)
+bash
+Copy
+Edit
 cd gateway
 npm install
-Add .env with appropriate environment variables (secure API keys, service URLs).
+Add .env File (example):
 
-Example .env:
-
+env
+Copy
+Edit
 JWT_SECRET=your_secure_secret
+🔌 4. Install gRPC & Protocol Buffers
+Install Protobuf Compiler
 
-
-4. Install gRPC
-
-# Install Protocol Buffers compiler
+bash
+Copy
+Edit
 sudo apt install -y protobuf-compiler
+Install gRPC Tools for Go
 
-# Install gRPC tools for Go
+bash
+Copy
+Edit
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+Update PATH
 
-# Make sure Go binaries are in your PATH
+bash
+Copy
+Edit
 export PATH="$PATH:$(go env GOPATH)/bin"
-Always validate .proto files for security (no unsafe or deprecated options).
+💻 5. Setup Golang Backend Services
+Install Go
 
-5. Install Golang Backend Services
-
-# Install Go (latest stable version recommended)
+bash
+Copy
+Edit
 wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile
+Check Go Version
 
-# Check Go version
+bash
+Copy
+Edit
 go version
+Build and Run Service
 
-# Build and run your Go services
+bash
+Copy
+Edit
 cd backend/user-service
 go mod tidy
 go run main.go
-Use separate .env files for each service and avoid hardcoding secrets.
+✅ Use separate .env files and avoid hardcoding secrets
 
-☁6. Setup MinIO S3 Bucket (Self-Hosted S3)
+☁️ 6. Setup MinIO S3 Bucket
+Download & Install MinIO
 
-# Download MinIO server
+bash
+Copy
+Edit
 wget https://dl.min.io/server/minio/release/linux-amd64/minio
 chmod +x minio
 sudo mv minio /usr/local/bin/
+Run MinIO
 
-# Run MinIO
+bash
+Copy
+Edit
 minio server /mnt/data --console-address ":9001"
-Access: http://localhost:9000 (API), http://localhost:9001 (Console)
+Access URLs
 
-Default credentials:
+API: http://localhost:9000
+
+Console: http://localhost:9001
+
+Default Credentials
 
 Access Key: minioadmin
 
 Secret Key: minioadmin
 
-Change default credentials immediately using environment variables or config file:
+✅ Change immediately:
 
-
+bash
+Copy
+Edit
 export MINIO_ROOT_USER=your_secure_user
 export MINIO_ROOT_PASSWORD=your_secure_password
+🔐 7. JWT Authentication
+Use Libraries
 
-7. JWT Authentication
-In both Go and Node services:
+Go: github.com/golang-jwt/jwt/v5
 
-Use libraries like github.com/golang-jwt/jwt/v5 (Go) and jsonwebtoken (Node.js)
+Node.js: jsonwebtoken
 
-Store secrets securely (using Vault or .env)
+Token Validation (Go Example):
 
-Example token validation (Go):
-
-
+go
+Copy
+Edit
 token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
     return []byte(os.Getenv("JWT_SECRET")), nil
 })
- Always use strong, rotating secrets and validate algorithm used (alg === "HS256" or RS256).
+✅ Validate algorithm (e.g., HS256 or RS256)
+✅ Store secrets in .env or secret manager (Vault, AWS Secrets Manager, etc.)
 
-8. Run All Services (Example Using Docker Compose - Optional)
-Create a docker-compose.yml to orchestrate:
+🐳 8. Run All Services (Docker Compose - Optional)
+Include in docker-compose.yml:
 
-React frontend
+React Frontend
 
-GraphQL gateway
+GraphQL Gateway
 
-Go microservices
+Go Microservices
 
 MinIO
 
-Redis/PostgreSQL if needed
+Redis/PostgreSQL (if needed)
 
-9. Security Recommendations
-JWT tokens used in authentication
+🔒 Security Recommendations
+Use strong, rotating JWT secrets
 
+Never hardcode credentials
+
+Secure .env files and access control
+
+Validate incoming tokens and avoid deprecated Protobuf options
